@@ -20,14 +20,17 @@ function addBookToLibrary(){
     const pages = document.getElementById("pages").value;
 
     const newBook = new Book(title, author, pages)
+    const inputs = document.querySelectorAll('#title, #author, #pages');
+    
 
-    /*const myObject = {
-        title: title,
-        author: author,
-        pages: pages
-    }*/
     myLibrary.push(newBook);
+
+    inputs.forEach(input =>{
+        input.value = '';
+    })
+    
     console.log(myLibrary)
+    
 }
 
 addBook.addEventListener("click", addBookToLibrary);
