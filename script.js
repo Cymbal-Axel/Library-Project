@@ -19,18 +19,23 @@ function addBookToLibrary(){
     const author = document.getElementById("author").value;
     const pages = document.getElementById("pages").value;
 
-    const newBook = new Book(title, author, pages)
+    if(title || author || pages){
+        const newBook = new Book(title, author, pages)
+        myLibrary.push(newBook);
+    }
+
     const inputs = document.querySelectorAll('#title, #author, #pages');
     
 
-    myLibrary.push(newBook);
 
     inputs.forEach(input =>{
         input.value = '';
-    })
-    
-    console.log(myLibrary)
-    
+    });
+
+
 }
 
+
 addBook.addEventListener("click", addBookToLibrary);
+
+
