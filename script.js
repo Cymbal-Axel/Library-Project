@@ -5,7 +5,7 @@ var bookCardDiv = document.getElementById("library-container");
 const addBookCardToLibraryDiv = (book) => {
   
   	        var newDiv = document.createElement("div");
-             newDiv.setAttribute("id", book.id); 
+              newDiv.setAttribute("id", book.id); 
 
             var newTitle = document.createElement("span");
             var newH5 = document.createElement("h5");
@@ -32,15 +32,29 @@ const addBookCardToLibraryDiv = (book) => {
             newDiv.appendChild(newPages);
     
             bookCardDiv.appendChild(newDiv);
+
+
   
 }
 
 
- const deleteCard = (id) => {
-    console.log(id)
-}
+
 
 const myLibrary = [];
+
+
+const deleteCard = (id) => {
+
+    myLibrary.forEach((book, index) => {
+        console.log(index)
+        // console.log(`${book.id} -------- ${id}`)
+        if(book.id == id){
+            // console.log(index)
+            console.log(book)
+             myLibrary.splice(index, 1);
+        }
+    })
+}
 
 function Book(title, author, pages){
     bookId =  crypto.randomUUID()
@@ -54,10 +68,10 @@ function Book(title, author, pages){
 
         createDeleteButton.setAttribute("id", "delete-button"); 
 
-         var deleteButton = document.getElementById("delete-button");
+        //  var deleteButton = document.getElementById("delete-button");
 
          createDeleteButton.addEventListener("click", function(){
-             deleteCard(bookId.saraza);
+             deleteCard(bookId);
          }, false);
 
 
