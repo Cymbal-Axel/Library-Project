@@ -3,13 +3,14 @@ const addBook = document.getElementById("add-book-button");
 var bookCardDiv = document.getElementById("library-container");
 
 const addBookCardToLibraryDiv = (book) => {
-  
   	        var newDiv = document.createElement("div");
               newDiv.setAttribute("id", book.id); 
 
             var newTitle = document.createElement("span");
             var newH5 = document.createElement("h5");
             var titleContent = document.createTextNode(`title:  ${book.title}`);
+              newTitle.setAttribute("id", book.id); 
+
 
             newH5.appendChild(titleContent);
             newTitle.appendChild(newH5);
@@ -18,6 +19,7 @@ const addBookCardToLibraryDiv = (book) => {
             var newAuthor = document.createElement("span");
             var newH5 = document.createElement("h5");
             var authorContent = document.createTextNode(`Author:  ${book.author}`);
+              newAuthor.setAttribute("id", book.id);            
 
             newH5.appendChild(authorContent);
             newAuthor.appendChild(newH5);
@@ -26,6 +28,9 @@ const addBookCardToLibraryDiv = (book) => {
             var newPages = document.createElement("span");
             var newH5 = document.createElement("h5");
             var pagesContent = document.createTextNode(`Pages:  ${book.pages}`);
+              newPages.setAttribute("id", book.id);            
+
+
 
             newH5.appendChild(pagesContent);
             newPages.appendChild(newH5);
@@ -43,41 +48,43 @@ const addBookCardToLibraryDiv = (book) => {
 const myLibrary = [];
 
 
-const deleteCard = (id) => {
+const deleteCard = (id, createDeleteButton) => {
+    var buttonId = document.getElementById(createDeleteButton.id)
+    buttonId.remove();
 
     myLibrary.forEach((book, index) => {
-        console.log(index)
-        // console.log(`${book.id} -------- ${id}`)
         if(book.id == id){
-            // console.log(index)
-            console.log(book)
-             myLibrary.splice(index, 1);
-        }
+            var element = document.getElementById(book.id)
+            myLibrary.splice(index, 1);
+            element.remove();
+        }   
     })
 }
 
 function Book(title, author, pages){
-    bookId =  crypto.randomUUID()
+    var bookId =  crypto.randomUUID()
+    var createDeleteButton = document.createElement("button");
+    var buttonText = document.createTextNode("Delete");
+        createDeleteButton.setAttribute("id", bookId);
+
+
     this.id = bookId
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.button = function(){
-        var createDeleteButton = document.createElement("button");
-        var buttonText = document.createTextNode("Delete");
-
-        createDeleteButton.setAttribute("id", "delete-button"); 
+        
 
         //  var deleteButton = document.getElementById("delete-button");
 
          createDeleteButton.addEventListener("click", function(){
-             deleteCard(bookId);
+             deleteCard(bookId, createDeleteButton);
          }, false);
 
 
+         createDeleteButton.appendChild(buttonText);
+         bookCardDiv.appendChild(createDeleteButton); 
 
-        createDeleteButton.appendChild(buttonText);
-        bookCardDiv.appendChild(createDeleteButton);
 
 
     }
