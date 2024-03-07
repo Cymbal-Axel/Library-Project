@@ -1,4 +1,5 @@
 const addBook = document.getElementById("add-book-button");
+const newBook = document.getElementById("new-book-button");
 
 var bookCardDiv = document.getElementById("library-container");
 
@@ -92,6 +93,10 @@ function Book(title, author, pages){
 }
 
 
+function changeStyle(){
+    document.getElementById("input-container").classList.remove('inputs-button');
+}
+
 function addBookToLibrary(){
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
@@ -102,6 +107,8 @@ function addBookToLibrary(){
         myLibrary.push(newBook);
         addBookCardToLibraryDiv(newBook);
         newBook.button()
+        document.getElementById("input-container").classList.add('inputs-button');
+
     }
 
 
@@ -116,6 +123,6 @@ function addBookToLibrary(){
 }
 
 
-
+newBook.addEventListener("click", changeStyle)
 addBook.addEventListener("click", addBookToLibrary);
 
